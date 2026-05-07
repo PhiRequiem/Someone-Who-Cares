@@ -1,6 +1,6 @@
 export const storyData = {
 
-  // ── APERTURA ────────────────────────────────────────────────────────────────
+  // APERTURA
 
   start: {
     text: [
@@ -32,7 +32,7 @@ export const storyData = {
     choices: [{ text: "Continuar", next: "mensaje_supervisor" }]
   },
 
-  // ── ACTO 1: EL MENSAJE ──────────────────────────────────────────────────────
+  // ACTO 1: EL MENSAJE
 
   mensaje_supervisor: {
     text: [
@@ -42,6 +42,7 @@ export const storyData = {
       "'Tienes hasta el jueves. Empieza por el barrio.'"
     ],
     bg: 'bg_room.png',
+    signalNotif: { from: 'Carmen G.', text: 'Fuente en la Procuraduría. Necesito evidencia sólida.' },
     choices: [
       { text: "Responder: voy a trabajar en eso", next: "acto_1_inicio" },
       { text: "Analizar la situación primero", next: "acto_1_inicio" }
@@ -52,16 +53,16 @@ export const storyData = {
     text: [
       "Lluvia constante... el tipo de ruido que me ayuda a concentrarme.",
       "Antes de moverme, necesito asegurar mis datos.",
-      "Si me están vigilando, cualquier descuido puede comprometer la investigación — y a mis fuentes."
+      "Si me están vigilando, cualquier descuido puede comprometer la investigación. También a mis fuentes."
     ],
     bg: 'bg_room.png',
     choices: [
       { text: "Hacer backup cifrado y activar VPN", next: "seguridad_ok" },
-      { text: "No hay tiempo — revisar mensajes primero", next: "seguridad_skip" }
+      { text: "No hay tiempo, revisar mensajes primero", next: "seguridad_skip" }
     ]
   },
 
-  // ── BIFURCACIÓN: SEGURIDAD DIGITAL ──────────────────────────────────────────
+  // BIFURCACIÓN: SEGURIDAD DIGITAL
 
   seguridad_ok: {
     text: [
@@ -84,7 +85,7 @@ export const storyData = {
     choices: [{ text: "Ver qué contiene el archivo", next: "investigar_foto" }]
   },
 
-  // ── ACTO 1: LA FOTO ─────────────────────────────────────────────────────────
+  // ACTO 1: LA FOTO
 
   investigar_foto: {
     text: [
@@ -104,43 +105,87 @@ export const storyData = {
     ],
     bg: 'bg_room.png',
     choices: [
-      { text: "Buscar el edificio en WebArchive", next: "evaluar_evidencia_web" },
-      { text: "Ya es suficiente — ir al barrio", next: "evaluar_evidencia_skip" }
+      { text: "Buscar el edificio en WebArchive", next: "webarchive_busqueda" },
+      { text: "Ya es suficiente, ir al barrio", next: "evaluar_evidencia_skip" }
     ]
   },
 
-  // ── BIFURCACIÓN: EVALUACIÓN DE EVIDENCIA ────────────────────────────────────
+  // BIFURCACIÓN: EVALUACIÓN DE EVIDENCIA
+
+  webarchive_busqueda: {
+    text: ["Busco 'Edificio Cañada Norte' en WebArchive..."],
+    bg: 'bg_room.png', action: 'open_browser',
+    choices: [{ text: "Guardar evidencia y cerrar", next: "evaluar_evidencia_web" }]
+  },
 
   evaluar_evidencia_web: {
     text: [
-      "Busco 'Edificio Cañada Norte' en WebArchive...",
-      "Encuentro una noticia de 2019: 'Vecinos denuncian amenazas de desalojo vinculadas a Inmobiliaria Varela S.A.'",
+      "La nota es del 21 de noviembre de 2019.",
       "La misma semana que Sebastián desapareció.",
-      "Metadata de vigilancia + historial público archivado. Esto es evidencia real."
+      "Y el sitio fue dado de baja dos días después. Justo el 23N.",
+      "Metadata más artículo archivado. Esto ya es evidencia real. Pero antes de salir..."
     ],
     bg: 'bg_room.png',
-    choices: [{ text: "Guardar evidencia e ir al barrio", next: "transicion_barrio" }]
+    choices: [{ text: "Prepararse para salir", next: "evaluacion_campo" }]
   },
 
   evaluar_evidencia_skip: {
     text: [
       "Tengo: una IP de VPN, coordenadas GPS y una fecha.",
       "¿Es suficiente para una fuente oficial? Probablemente no.",
-      "Pero el tiempo corre. En el barrio puede haber más pistas."
+      "Pero el tiempo corre. Antes de ir al barrio, un momento..."
     ],
     bg: 'bg_room.png',
+    choices: [{ text: "Prepararse para salir", next: "evaluacion_campo" }]
+  },
+
+  evaluacion_campo: {
+    text: [
+      "Confirmado: me vigilaban desde el edificio de enfrente.",
+      "Debo salir al barrio. Un error ahora puede comprometer todo."
+    ],
+    bg: 'bg_room.png',
+    action: 'open_quiz',
+    quiz: {
+      id: 'safety',
+      question: "¿Qué medidas tomas antes de salir del depto?",
+      options: [
+        {
+          label: 'A',
+          text: "Salir directo por la puerta principal. No hay tiempo que perder.",
+          correct: false,
+          visibilityDelta: 20,
+          feedback: "Una ruta predecible y sin aviso previo facilita el seguimiento. Si alguien te observa, sabe exactamente a dónde vas y cuándo."
+        },
+        {
+          label: 'B',
+          text: "Avisar a Carmen por Signal, variar la ruta y dejar el laptop cifrado en casa.",
+          correct: true,
+          visibilityDelta: -5,
+          feedback: "Avisar a un contacto de confianza, cambiar la ruta y no llevar equipo innecesario son protocolos básicos de seguridad operacional en campo."
+        },
+        {
+          label: 'C',
+          text: "Publicar en redes sociales que vas a documentar el barrio para tener testigos.",
+          correct: false,
+          visibilityDelta: 35,
+          feedback: "Las redes sociales alertan a todo el mundo, incluyendo a quienes te vigilan. Nunca publiques tu ubicación en tiempo real durante una investigación activa."
+        }
+      ]
+    },
     choices: [{ text: "Ir al barrio", next: "transicion_barrio" }]
   },
 
-  // ── ACTO 2: EL BARRIO ───────────────────────────────────────────────────────
+  // ACTO 2: EL BARRIO
 
   transicion_barrio: {
     text: [
       "Cruzo la ciudad rápido, evitando las cámaras del centro.",
-      "En La Cañada todo parece igual — pero la tensión se siente diferente.",
+      "En La Cañada todo parece igual, pero la tensión se siente diferente.",
       "Doña Rosa me espera."
     ],
     bg: 'bg_barrio.png', type: 'cinematic',
+    signalNotif: { from: 'Doña Rosa', text: 'Ven al barrio. Algo está pasando aquí. 🙏' },
     choices: [{ text: "Llegar al barrio", next: "dona_rosa_intro" }]
   },
 
@@ -148,7 +193,7 @@ export const storyData = {
     text: [
       "Doña Rosa Bermúdez. 67 años. Tres décadas viviendo en La Cañada.",
       "Organizó las primeras asambleas de vecinos cuando llegaron las amenazas de desalojo.",
-      "Si alguien sabe qué pasa en este barrio — y quién lo financia — es ella."
+      "Si alguien sabe qué pasa en este barrio, y quién lo financia, es ella."
     ],
     bg: 'bg_barrio.png',
     choices: [{ text: "Hablar con Doña Rosa", next: "inicio_barrio" }]
@@ -157,7 +202,7 @@ export const storyData = {
   inicio_barrio: {
     text: [
       "'Andrea, gracias a dios. Hay un coche oscuro sin placas rondando desde ayer.'",
-      "'Y eso que vuela...' — señala al cielo — 'lleva dos noches sobrevolando las casas.'",
+      "'Y eso que vuela...' señala al cielo. 'Lleva dos noches sobrevolando las casas.'",
       "Miro hacia arriba. Un dron de vigilancia. Profesional. Caro."
     ],
     bg: 'bg_barrio.png',
@@ -167,7 +212,7 @@ export const storyData = {
     ]
   },
 
-  // ── BIFURCACIÓN: PISTA DEL COCHE ────────────────────────────────────────────
+  // BIFURCACIÓN: PISTA DEL COCHE
 
   pista_coche: {
     text: [
@@ -176,10 +221,11 @@ export const storyData = {
       "El coche y el dron son del mismo grupo. Necesito la IP del dron para confirmarlo."
     ],
     bg: 'bg_barrio.png',
+    evidenceDrop: { id: 'testimonio-rosa', name: 'Coche sin placas, Varela Seguridad', type: 'Testimonio' },
     choices: [{ text: "Interceptar el dron", next: "terminal_dron" }]
   },
 
-  // ── ACTO 2: EL DRON ─────────────────────────────────────────────────────────
+  // ACTO 2: EL DRON
 
   terminal_dron: {
     text: [
@@ -193,25 +239,63 @@ export const storyData = {
 
   revelacion_dron: {
     text: [
-      "IP registrada a: Varela Seguridad S.A. — subsidiaria de Inmobiliaria Varela S.A.",
+      "IP registrada a: Varela Seguridad S.A., subsidiaria de Inmobiliaria Varela S.A.",
       "La misma empresa que amenazaba a los vecinos en 2019.",
       "La misma semana en que Sebastián desapareció.",
-      "Por primera vez en cuatro años... tengo una pista real."
+      "Por primera vez en cuatro años... tengo una pista real. Pero antes de enviar esto..."
     ],
     bg: 'bg_barrio.png',
-    choices: [{ text: "Enviar todo a Carmen", next: "final_demo" }]
+    choices: [{ text: "Preparar el envío", next: "quiz_evidencia" }]
   },
 
-  // ── CIERRE ──────────────────────────────────────────────────────────────────
+  quiz_evidencia: {
+    text: [
+      "Tengo el paquete completo: metadatos, WebArchive, IP del dron.",
+      "Antes de enviárselo a Carmen: ¿cómo protejo esta información?"
+    ],
+    bg: 'bg_barrio.png',
+    action: 'open_quiz',
+    quiz: {
+      id: 'evidence',
+      question: "¿Cómo guardas y compartes de forma segura el paquete de evidencia?",
+      options: [
+        {
+          label: 'A',
+          text: "Subir todo a Google Drive con tu cuenta personal y compartir el link por email.",
+          correct: false,
+          visibilityDelta: 20,
+          feedback: "Los servicios de nube comerciales pueden ser accedidos por terceros mediante órdenes judiciales o vulnerabilidades. Nunca uses tu cuenta personal para evidencia sensible."
+        },
+        {
+          label: 'B',
+          text: "Cifrar con VeraCrypt, guardar los originales offline y compartir copias con la metadata eliminada.",
+          correct: true,
+          visibilityDelta: -5,
+          feedback: "Correcto. Cifrado local, respaldo de originales offline y eliminar metadata antes de compartir son las tres prácticas fundamentales para proteger evidencia sensible."
+        },
+        {
+          label: 'C',
+          text: "Comprimir todo en un ZIP y enviarlo por WhatsApp.",
+          correct: false,
+          visibilityDelta: 25,
+          feedback: "WhatsApp almacena metadatos de mensajes y un ZIP sin contraseña no cifra el contenido. Además, el historial de chats puede ser requisado."
+        }
+      ]
+    },
+    choices: [{ text: "Enviar evidencia a Carmen", next: "final_demo" }]
+  },
+
+  // CIERRE
 
   final_demo: {
     text: [
       "Le envío el paquete de evidencia a Carmen: metadata de la foto, historial de WebArchive, IP del dron.",
       "Su respuesta llega en minutos: 'Es suficiente. Mi fuente va a pedir la reapertura del caso.'",
       "'Andrea... esto es real. Y va a ponerse peligroso.'",
-      "— Fin del demo —"
+      "Fin del demo."
     ],
     bg: 'bg_barrio.png', type: 'cinematic',
-    choices: [{ text: "Reiniciar demo", next: "start" }]
+    signalNotif: { from: 'Carmen G.', text: 'Es suficiente. Mi fuente pide la reapertura. 🔒' },
+    choices: [{ text: "Ver resumen del demo", next: "start", showSummary: true }]
   }
 };

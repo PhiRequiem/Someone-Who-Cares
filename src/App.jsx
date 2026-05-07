@@ -1,25 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStory } from './hooks/useStory';
+import { useAmbientSound } from './hooks/useAmbientSound';
+import { setAudioMuted } from './audio/audioContext';
+import TitleScreen from './components/TitleScreen';
 import DialogueBox from './components/DialogueBox';
 import VisibilityMeter from './components/VisibilityMeter';
 import OSINTTerminal from './components/OSINTTerminal';
 import EvidenceJournal from './components/EvidenceJournal';
+import SignalNotif from './components/SignalNotif';
+import LocationBadge from './components/LocationBadge';
+import MuteButton from './components/MuteButton';
+import BrowserWindow from './components/BrowserWindow';
+import QuizPanel from './components/QuizPanel';
+import DemoSummary from './components/DemoSummary';
 
 function App() {
-  const { text, choices, action, terminalContext, bg, type, makeChoice } = useStory();
+  const [gameStarted, setGameStarted] = useState(false);
+  const [muted, setMuted] = useState(false);
+
+  const { text, choices, action, terminalContext, signalNotif, quiz, evidenceDrop, bg, type, makeChoice, resetStory } = useStory();
   const [showTerminal, setShowTerminal] = useState(false);
   const [activeTerminalContext, setActiveTerminalContext] = useState(null);
+  const [showBrowser, setShowBrowser] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [activeQuiz, setActiveQuiz] = useState(null);
   const [visibility, setVisibility] = useState(15);
   const [evidence, setEvidence] = useState([]);
   const [currentBg, setCurrentBg] = useState('assets/bg_barrio_dawn.png');
+  const [activeNotif, setActiveNotif] = useState(null);
+  const [showSummary, setShowSummary] = useState(false);
+  const [quizResults, setQuizResults] = useState({});
+
+  useAmbientSound(currentBg, gameStarted);
+
+  useEffect(() => { setAudioMuted(muted); }, [muted]);
 
   const isCinematic = type === 'cinematic';
 
   useEffect(() => {
-    if (bg) {
-      setCurrentBg(`assets/${bg}`);
-    }
+    if (bg) setCurrentBg(`assets/${bg}`);
   }, [bg]);
 
   useEffect(() => {
@@ -27,17 +47,59 @@ function App() {
       setActiveTerminalContext(terminalContext ?? null);
       setTimeout(() => setShowTerminal(true), 1500);
     }
+    if (action === 'open_browser') {
+      setTimeout(() => setShowBrowser(true), 600);
+    }
+    if (action === 'open_quiz') {
+      setActiveQuiz(quiz);
+      setTimeout(() => setShowQuiz(true), 700);
+    }
     if (action === 'increase_visibility') {
       setVisibility(v => Math.min(v + 25, 100));
     }
-  }, [action]);
+  }, [action, terminalContext]);
+
+  useEffect(() => {
+    if (signalNotif) setActiveNotif(signalNotif);
+  }, [signalNotif]);
+
+  useEffect(() => {
+    if (evidenceDrop) {
+      setEvidence(prev =>
+        prev.some(e => e.id === evidenceDrop.id) ? prev : [...prev, evidenceDrop]
+      );
+    }
+  }, [evidenceDrop]);
 
   const handleChoice = (choice) => {
-    if (showTerminal) return;
+    if (showTerminal || showBrowser || showQuiz) return;
+    if (choice.showSummary) {
+      setShowSummary(true);
+      return;
+    }
+    if (choice.toTitle) {
+      resetStory();
+      setGameStarted(false);
+      setVisibility(15);
+      setEvidence([]);
+      setShowTerminal(false);
+      setShowBrowser(false);
+      setShowQuiz(false);
+      setActiveQuiz(null);
+      setShowSummary(false);
+      setActiveTerminalContext(null);
+      setActiveNotif(null);
+      setCurrentBg('assets/bg_barrio_dawn.png');
+      return;
+    }
     makeChoice(choice.next);
   };
 
-  const bgFilter = showTerminal ? 'blur(4px) brightness(0.5)' : 'none';
+  if (!gameStarted) {
+    return <TitleScreen onStart={() => setGameStarted(true)} />;
+  }
+
+  const bgFilter = (showTerminal || showBrowser || showQuiz) ? 'blur(4px) brightness(0.5)' : 'none';
 
   return (
     <div className="game-container scanline-effect" style={{ backgroundColor: '#0a0a0c' }}>
@@ -48,7 +110,7 @@ function App() {
           style={{
             backgroundImage: `url(${currentBg})`,
             filter: bgFilter,
-            transition: 'filter 0.5s ease'
+            transition: 'filter 0.5s ease',
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -65,22 +127,62 @@ function App() {
 
       <div className="ui-layer">
         {!isCinematic && <VisibilityMeter value={visibility} />}
-        
-        <DialogueBox 
-          text={text} 
-          choices={choices} 
-          onChoice={handleChoice} 
-          disabled={showTerminal}
-          isCinematic={isCinematic}
+
+        <LocationBadge bg={currentBg} hidden={isCinematic} />
+
+        <SignalNotif
+          notif={activeNotif}
+          onDismiss={() => setActiveNotif(null)}
         />
+
+        <DialogueBox
+          text={text}
+          choices={choices}
+          onChoice={handleChoice}
+          disabled={showTerminal || showBrowser || showQuiz}
+          isCinematic={isCinematic}
+          speaker={isCinematic ? null : 'ANDREA'}
+        />
+
+        {showQuiz && activeQuiz && (
+          <>
+            <div style={{
+              position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+              background: 'rgba(0,0,0,0.65)', zIndex: 90,
+            }} />
+            <QuizPanel
+              quiz={activeQuiz}
+              onConfirm={(correct, delta) => {
+                setVisibility(v => Math.min(Math.max(v + delta, 0), 100));
+                if (activeQuiz?.id) {
+                  setQuizResults(prev => ({ ...prev, [activeQuiz.id]: correct }));
+                }
+              }}
+              onClose={() => setShowQuiz(false)}
+            />
+          </>
+        )}
+
+        {showBrowser && (
+          <>
+            <div style={{
+              position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+              background: 'rgba(0,0,0,0.6)', zIndex: 90,
+            }} onClick={(e) => e.stopPropagation()} />
+            <BrowserWindow
+              onClose={() => setShowBrowser(false)}
+              onSuccess={(data) => setEvidence(prev => [...prev, data])}
+            />
+          </>
+        )}
 
         {showTerminal && (
           <>
             <div style={{
               position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-              background: 'rgba(0,0,0,0.6)', zIndex: 90
+              background: 'rgba(0,0,0,0.6)', zIndex: 90,
             }} onClick={(e) => e.stopPropagation()} />
-            
+
             <OSINTTerminal
               context={activeTerminalContext}
               onClose={() => setShowTerminal(false)}
@@ -93,7 +195,31 @@ function App() {
         )}
 
         {!isCinematic && <EvidenceJournal items={evidence} />}
+
+        <MuteButton muted={muted} onToggle={() => setMuted(m => !m)} />
       </div>
+
+      {showSummary && (
+        <DemoSummary
+          evidence={evidence}
+          visibility={visibility}
+          quizResults={quizResults}
+          onRestart={() => {
+            resetStory();
+            setGameStarted(false);
+            setVisibility(15);
+            setEvidence([]);
+            setShowTerminal(false);
+            setShowBrowser(false);
+            setShowQuiz(false);
+            setActiveQuiz(null);
+            setShowSummary(false);
+            setQuizResults({});
+            setActiveNotif(null);
+            setCurrentBg('assets/bg_barrio_dawn.png');
+          }}
+        />
+      )}
     </div>
   );
 }

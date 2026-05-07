@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, X } from 'lucide-react';
+import { playClick, playKeyClick } from '../audio/playClick';
 
 const SCAN_RESPONSES = {
   foto: {
@@ -23,18 +24,25 @@ const SCAN_RESPONSES = {
       'Subsidiaria de: Inmobiliaria Varela S.A.',
       'NIT: 900.123.456-7',
     ],
-    evidence: { id: 'meta-dron', name: 'IP dron — Varela Seguridad S.A.', type: 'Rastreo RF' }
+    evidence: { id: 'meta-dron', name: 'IP dron, Varela Seguridad S.A.', type: 'Rastreo RF' }
   }
 };
 
 export default function OSINTTerminal({ context, onClose, onSuccess }) {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([
-    'SWC-OSINT v2.15.0 — Terminal de Investigación Digital',
+    'SWC-OSINT v2.15.0 | Terminal de Investigación Digital',
     'Conexión segura establecida. Escriba "help" para ver comandos.',
     ''
   ]);
   const scrollRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Focus the input when the terminal mounts (delay lets the animation settle)
+  useEffect(() => {
+    const t = setTimeout(() => inputRef.current?.focus(), 120);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -42,8 +50,14 @@ export default function OSINTTerminal({ context, onClose, onSuccess }) {
     }
   }, [history]);
 
+  const focusInput = () => inputRef.current?.focus();
+
   const handleCommand = (e) => {
-    if (e.key !== 'Enter') return;
+    if (e.key !== 'Enter') {
+      playKeyClick();
+      return;
+    }
+    playClick();
     const cmd = input.toLowerCase().trim();
     let lines = [];
 
@@ -87,6 +101,7 @@ export default function OSINTTerminal({ context, onClose, onSuccess }) {
         boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
       }}
       className="glass"
+      onClick={focusInput}
     >
       <div style={{
         padding: '10px 15px',
@@ -120,7 +135,7 @@ export default function OSINTTerminal({ context, onClose, onSuccess }) {
         <div style={{ display: 'flex', gap: '8px' }}>
           <span>{'>'}</span>
           <input
-            autoFocus
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleCommand}

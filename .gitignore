@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.vite/
+
+# Env vars
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings
+.claude/
+
+# Design documents & reference files (no van al repo)
+*.pdf
+Someone who cares Game Design Document V2.15.0.docx.pdf
+especificaciones.md
+IDEAS.md
+signal-*.jpeg
+signal-*.jpg
+signal-*.png
+signal-2026-05-05-200434_002.jpeg
+
+# Logs
+*.log
+npm-debug.log*
