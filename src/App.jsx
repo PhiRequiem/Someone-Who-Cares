@@ -19,7 +19,7 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [muted, setMuted] = useState(false);
 
-  const { text, choices, action, terminalContext, signalNotif, quiz, evidenceDrop, bg, type, makeChoice, resetStory } = useStory();
+  const { text, choices, action, terminalContext, signalNotif, quiz, evidenceDrop, bg, type, autoAdvance, visibilityDelta, makeChoice, resetStory } = useStory();
   const [showTerminal, setShowTerminal] = useState(false);
   const [activeTerminalContext, setActiveTerminalContext] = useState(null);
   const [showBrowser, setShowBrowser] = useState(false);
@@ -27,7 +27,7 @@ function App() {
   const [activeQuiz, setActiveQuiz] = useState(null);
   const [visibility, setVisibility] = useState(15);
   const [evidence, setEvidence] = useState([]);
-  const [currentBg, setCurrentBg] = useState('assets/bg_barrio_dawn.png');
+  const [currentBg, setCurrentBg] = useState('assets/black.png');
   const [activeNotif, setActiveNotif] = useState(null);
   const [showSummary, setShowSummary] = useState(false);
   const [quizResults, setQuizResults] = useState({});
@@ -41,6 +41,12 @@ function App() {
   useEffect(() => {
     if (bg) setCurrentBg(`assets/${bg}`);
   }, [bg]);
+
+  useEffect(() => {
+    if (!autoAdvance) return;
+    const timer = setTimeout(() => makeChoice(autoAdvance.next), autoAdvance.delay ?? 2000);
+    return () => clearTimeout(timer);
+  }, [autoAdvance, makeChoice]);
 
   useEffect(() => {
     if (action === 'open_terminal') {
@@ -57,7 +63,10 @@ function App() {
     if (action === 'increase_visibility') {
       setVisibility(v => Math.min(v + 25, 100));
     }
-  }, [action, terminalContext]);
+    if (typeof visibilityDelta === 'number') {
+      setVisibility(v => Math.min(Math.max(v + visibilityDelta, 0), 100));
+    }
+  }, [action, terminalContext, visibilityDelta]);
 
   useEffect(() => {
     if (signalNotif) setActiveNotif(signalNotif);
@@ -89,7 +98,7 @@ function App() {
       setShowSummary(false);
       setActiveTerminalContext(null);
       setActiveNotif(null);
-      setCurrentBg('assets/bg_barrio_dawn.png');
+      setCurrentBg('assets/black.png');
       return;
     }
     makeChoice(choice.next);
@@ -216,7 +225,7 @@ function App() {
             setShowSummary(false);
             setQuizResults({});
             setActiveNotif(null);
-            setCurrentBg('assets/bg_barrio_dawn.png');
+            setCurrentBg('assets/black.png');
           }}
         />
       )}

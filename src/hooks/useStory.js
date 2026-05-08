@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { storyData } from '../story/storyData';
+import { storyData } from '../story/storyDataV2';
 
 export function useStory() {
   const [currentId, setCurrentId] = useState('start');
@@ -16,7 +16,7 @@ export function useStory() {
 
   return {
     text: currentNode.text,
-    choices: currentNode.choices,
+    choices: currentNode.choices ?? [],
     action: currentNode.action,
     terminalContext: currentNode.terminalContext,
     signalNotif: currentNode.signalNotif,
@@ -24,6 +24,8 @@ export function useStory() {
     evidenceDrop: currentNode.evidenceDrop,
     bg: currentNode.bg,
     type: currentNode.type,
+    autoAdvance: currentNode.autoAdvance ?? null,
+    visibilityDelta: currentNode.visibilityDelta ?? null,
     makeChoice,
     resetStory,
   };

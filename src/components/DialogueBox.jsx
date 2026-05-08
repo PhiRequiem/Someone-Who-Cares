@@ -2,7 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playClick } from '../audio/playClick';
 
-export default function DialogueBox({ text, choices, onChoice, disabled, isCinematic, speaker }) {
+const SPEAKER_COLORS = {
+  andrea: '#00f2ff',
+  sebas:  '#ffc947',
+  mama:   '#c8a8e9',
+};
+
+export default function DialogueBox({ text, choices = [], onChoice, disabled, isCinematic, speaker }) {
   // Stable ref so the keydown effect doesn't re-run on every render
   const onChoiceRef = useRef(onChoice);
   useEffect(() => { onChoiceRef.current = onChoice; });
@@ -70,16 +76,21 @@ export default function DialogueBox({ text, choices, onChoice, disabled, isCinem
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {text.map((line, i) => (
-              <p key={i} style={{
-                margin: '0 0 15px 0', lineHeight: '1.8',
-                fontSize: isCinematic ? '1.5rem' : '1.1rem',
-                fontWeight: isCinematic ? '600' : '400',
-                textShadow: isCinematic ? '0 2px 10px rgba(0,0,0,0.8)' : 'none',
-              }}>
-                {line}
-              </p>
-            ))}
+            {text.map((line, i) => {
+              const lineText = typeof line === 'string' ? line : line.text;
+              const lineColor = typeof line === 'string' ? undefined : SPEAKER_COLORS[line.speaker];
+              return (
+                <p key={i} style={{
+                  margin: '0 0 15px 0', lineHeight: '1.8',
+                  fontSize: isCinematic ? '1.5rem' : '1.1rem',
+                  fontWeight: isCinematic ? '600' : '400',
+                  textShadow: isCinematic ? '0 2px 10px rgba(0,0,0,0.8)' : 'none',
+                  color: lineColor,
+                }}>
+                  {lineText}
+                </p>
+              );
+            })}
           </motion.div>
         </AnimatePresence>
       </div>

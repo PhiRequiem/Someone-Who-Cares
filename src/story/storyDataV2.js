@@ -8,15 +8,12 @@ export const storyData = {
       "Jesus Abad Colorado"
     ],
     bg: 'black.png', type: 'cinematic',
-    // TAREA: efectos sonoras de personas en la calle. Aumentando gradualmente el volumen
-    // DIRECION: texto em fade in y se queda por 10 segundos
     choices: [{ text: "Continuar", next: "intro_2" }]
   },
 
   intro_2: {
     text: [
       "Tecnologia Humanista, en asociación con Seguridades.org presenta"
-    // DIRECION: texto em fade in y se queda por 5 segundos
     ],
     bg: 'black.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_3" }]
@@ -25,40 +22,30 @@ export const storyData = {
   intro_3: {
     text: [
       "Bogotá, Colombia. 2020"
-    // DIRECION: se queda por 5 segundos
     ],
-    // Primer panel. Plaza de Bolíva con pocas personas
     bg: 'plaza-de-bolivar-geral-01-a.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_4" }]
   },
 
   intro_4: {
     text: [
-      // DIRECIÓN: cada frase abajo debe tener una formatación distinta, aunque
-      // disticiones senciallas, para sugerir distintos traseuntes hablando.
       "Hay, no! Que allí está el tombo y no me gusta",
       "Palomas? Son ratas aladas! jajajajja",
-      "Pues era esto o plombo. ",
-      // poner la frase seguiente en un color distinto. Es el hermano de Andrea.
-      "Andeeeee, mira la alpaca!",
+      "Pues era esto o plombo.",
+      { text: "Andeeeee, mira la alpaca!", speaker: 'sebas' },
       "Pues que me quedé dormido, marica, y ela se quedó molesta.",
     ],
-    // segundo panel. Plaza de Bolíva con algunas personas
     bg: 'plaza-de-bolivar-geral-01-b.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_5" }]
   },
 
   intro_5: {
     text: [
-      // DIRECIÓN: cada frase abajo debe tener una formatación distinta, aunque
-      // disticiones senciallas, para sugerir distintos traseuntes hablando.
       "El man se caigó de medo!",
       "A la orden, señora!",
-      // poner la frase seguiente en una formatación similar ao del hermano de Andrea. Es la mamá de Andrea.
-      "Andrea, segura la mano de tu hermano",
+      { text: "Andrea, segura la mano de tu hermano", speaker: 'mama' },
       "No! Que vaina!",
     ],
-    // tercer panel. Plaza de Bolíva con todas las personas
     bg: 'plaza-de-bolivar-geral-01-c.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_6" }]
   },
@@ -67,83 +54,65 @@ export const storyData = {
     text: [
       "Andrea y su hermano caminan por la plaza de Bolívar en su primer visita a Bogotá."
     ],
-    // Plaza de Bolivar al nivel del piso. Andrea y Sebas de manos dadas, algunas personas.
     bg: 'plaza-de-bolivar-al-piso-01-a.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_7" }]
   },
 
   intro_7: {
     text: [
-      // poner la frase seguiente en la formatación de Andrea.
-      "(reindo) No, no, no. No me gusta las palomas.",
-      // poner la frase seguiente la formatación de Sebastián/Sebas.
-      "Mama! Quiero un Chocomaro!",
+      { text: "(reindo) No, no, no. No me gusta las palomas.", speaker: 'andrea' },
+      { text: "Mama! Quiero un Chocomaro!", speaker: 'sebas' },
     ],
-    // Plaza de Bolivar al nivel del piso. Andrea y Sebas de manos dadas, algunas personas.
     bg: 'plaza-de-bolivar-al-piso-01-b.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_8" }]
   },
 
-  intro_7: {
+  intro_8: {
     text: [
-      // poner la frase seguiente en la formatación de Andrea.
-      "Sebas, aquí! Aquí!",
+      { text: "Sebas, aquí! Aquí!", speaker: 'andrea' },
     ],
-    // Plaza de Bolivar al nivel del piso. Andrea y Sebas. Separados un poco distante.
     bg: 'plaza-de-bolivar-al-piso-01-c.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_9" }]
   },
 
   intro_9: {
     text: [
-      // poner la frase seguiente en la formatación de Andrea.
-      "Sebás ¿Donde vás?",
-      // poner la frase seguiente en la formatación de la mamá.
-      "Andrea, segura la mano de tu hermano",
+      { text: "Sebás ¿Donde vás?", speaker: 'andrea' },
+      { text: "Andrea, segura la mano de tu hermano", speaker: 'mama' },
     ],
-    // Plaza de Bolivar al nivel del piso. Más personas, algunos afiches dr protestas. Andrea y Sebas, Sebas más distante y borroso.
     bg: 'plaza-de-bolivar-al-piso-01-d.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_10" }]
   },
 
   intro_10: {
     text: [
-      // poner la frase seguiente en la formatación de Andrea.
-      "¿Donde estás?"
+      { text: "¿Donde estás?", speaker: 'andrea' }
     ],
-    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
     bg: 'plaza-de-bolivar-protesta-01-a.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_11" }]
   },
 
   intro_11: {
     text: [
-      // poner la frase seguiente en la formatación de Andrea.
-      "¡Sebas¿  Donde estás?",
-      // poner la frase seguiente en la formatación de la mamá.
-      "Andrea ¿donde está tu hermano?",
+      { text: "¡Sebas¿  Donde estás?", speaker: 'andrea' },
+      { text: "Andrea ¿donde está tu hermano?", speaker: 'mama' },
     ],
-    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
     bg: 'plaza-de-bolivar-protesta-01-b.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_12" }]
   },
 
   intro_12: {
     text: [
-      // poner la frase seguiente en la formatación de Andrea.
-      "Sebas?! Seebaaaas!!",
+      { text: "Sebas?! Seebaaaas!!", speaker: 'andrea' },
     ],
-    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
     bg: 'black.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_13" }]
   },
 
   intro_13: {
     text: [
-      // Titular
       "Alguien a quien le importe",
     ],
-    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
     bg: 'black.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "andrea_starts_day_01a" }]
   },
@@ -152,61 +121,96 @@ export const storyData = {
 
   andrea_starts_day_01a: {
     text: [
-      // alerta de mensaje, telefone vibra
       "bzzzzzzzzzz bzzzzzzzz;"
     ],
-    bg: 'andrea-sleeps-closed-eyes-01a.png',
-    signalNotif: { from: 'Carmen G.', text: '[1 mesaje]' }
+    bg: 'andrea-sleeps-closed-eyes-01a.png', type: 'cinematic',
+    signalNotif: { from: 'Carmen G.', text: '[1 mesaje]' },
+    autoAdvance: { next: 'andrea_starts_day_01b', delay: 3000 }
   },
 
-   andrea_starts_day_01b: {
+  andrea_starts_day_01b: {
     text: [
-      // alerta de mensaje, telefone vibra
       "bzzzzzzzzzz bzzzzzzzz;"
     ],
-    bg: 'andrea-sleeps-open-eyes-01a.png',
-    signalNotif: { from: 'Carmen G.', text: '[2 mesajes]' }
+    bg: 'andrea-sleeps-open-eyes-01a.png', type: 'cinematic',
+    signalNotif: { from: 'Carmen G.', text: '[2 mesajes]' },
+    autoAdvance: { next: 'andrea_starts_day_01c', delay: 3000 }
   },
 
-   andrea_starts_day_01c: {
+  andrea_starts_day_01c: {
     text: [
-      // alerta de mensaje, telefone vibra
       "bzzzzzzzzzz bzzzzzzzz;"
     ],
-    bg: 'andrea-sleeps-closed-eyes-01a.png',
-    signalNotif: { from: 'Carmen G.', text: '[3 mesajes]' }
+    bg: 'andrea-sleeps-closed-eyes-01a.png', type: 'cinematic',
+    signalNotif: { from: 'Carmen G.', text: '[3 mesajes]' },
+    autoAdvance: { next: 'mensaje_supervisor', delay: 3000 }
   },
-  
+
   mensaje_supervisor: {
     text: [
-      "3 notificaciiones en Signal. Es Carmen, su supervisora en la redacción.",
-      "Tu ojos está cerrados y estás cansada. No ha dormido nada.",
-      "Uno noche más de insomnio."
+      "3 notificaciones en Signal. Es Carmen, su supervisora en la redacción.",
+      "Tus ojos están cerrados y estás cansada. No has dormido nada.",
+      "Una noche más de insomnio."
     ],
     bg: 'bg_room.png',
     signalNotif: { from: 'Carmen G.', text: '[3 mesajes]' },
     choices: [
-      { text: "Levantar sin contestar", next: "acto_1_inicio" },
-      { text: "lanzar el teléfono y intentar dormir", next: "acto_1_inicio" },
-      { text: "apagar el teléfono y intentar dormir", next: "acto_1_inicio" },
-      { text: "Verificar mensajes", next: "acto_1_inicio" }
+      { text: "Levantar sin contestar", next: "msg_se_levanta_sin_leer" },
+      { text: "Lanzar el teléfono y intentar dormir", next: "msg_lanza_telefono" },
+      { text: "Apagar el teléfono y intentar dormir", next: "msg_apaga_telefono" },
+      { text: "Verificar mensajes", next: "msg_lee_mensajes" }
     ]
   },
 
-  // mensaje_supervisor: {
-  //   text: [
-  //     "Una notificación en Signal. Es Carmen, su supervisora en la redacción.",
-  //     "'Andrea. Tengo una fuente en la Procuraduría dispuesta a reabrir casos de desaparición del 23N.'",
-  //     "'Pero necesita evidencia sólida. No puede arriesgarse sin algo concreto.'",
-  //     "'Tienes hasta el jueves. Empieza por el barrio.'"
-  //   ],
-  //   bg: 'bg_room.png',
-  //   signalNotif: { from: 'Carmen G.', text: 'Fuente en la Procuraduría. Necesito evidencia sólida.' },
-  //   choices: [
-  //     { text: "Responder: voy a trabajar en eso", next: "acto_1_inicio" },
-  //     { text: "Analizar la situación primero", next: "acto_1_inicio" }
-  //   ]
-  // },
+  msg_lee_mensajes: {
+    text: [
+      "'Andrea. Tengo una fuente en la Procuraduría dispuesta a reabrir casos de desaparición del 23N.'",
+      "'Pero necesita evidencia sólida. No puede arriesgarse sin algo concreto.'",
+      "'Tienes hasta el jueves. Empieza por el barrio.'",
+      "Jueves. Hoy es martes. 48 horas."
+    ],
+    bg: 'bg_room.png',
+    visibilityDelta: -5,
+    choices: [{ text: "Levantarse", next: "acto_1_inicio" }]
+  },
+
+  msg_se_levanta_sin_leer: {
+    text: [
+      "Me levanto sin mirar el teléfono.",
+      "Dos minutos después, suena una llamada entrante. Signal. Carmen.",
+      "La contesto a regañadientes.",
+      "'Andrea. Necesito que vayas al barrio hoy. Es urgente.'",
+      "Urgente. Sin contexto. Sin saber por qué."
+    ],
+    bg: 'bg_room.png',
+    signalNotif: { from: 'Carmen G.', text: 'Llamada entrante...' },
+    visibilityDelta: 10,
+    choices: [{ text: "De acuerdo", next: "acto_1_inicio" }]
+  },
+
+  msg_apaga_telefono: {
+    text: [
+      "Teléfono apagado. Cierro los ojos.",
+      "Diez minutos. Quince.",
+      "No funciona.",
+      "Me levanto sin haber leído nada."
+    ],
+    bg: 'bg_room.png',
+    visibilityDelta: -3,
+    choices: [{ text: "Levantarse", next: "acto_1_inicio" }]
+  },
+
+  msg_lanza_telefono: {
+    text: [
+      "El teléfono rebota contra la pared.",
+      "La pantalla... intacta. Suerte.",
+      "El golpe me despertó del todo.",
+      "Me levanto. Sin haber leído nada. Con un humor pésimo."
+    ],
+    bg: 'bg_room.png',
+    visibilityDelta: 15,
+    choices: [{ text: "Levantarse (de mal humor)", next: "acto_1_inicio" }]
+  },
 
   acto_1_inicio: {
     text: [
