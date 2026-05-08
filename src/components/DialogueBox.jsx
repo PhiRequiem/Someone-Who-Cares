@@ -24,6 +24,21 @@ const TEXT_STYLES = {
     letterSpacing: '0.18em',
     margin: '0 0 0 0',
   },
+  'quote-main': {
+    fontSize: '1.15rem', fontStyle: 'italic', fontWeight: '300',
+    lineHeight: '1.9', opacity: 0.9,
+    margin: '0 0 20px 0',
+  },
+  'quote-author': {
+    fontSize: '0.78rem', fontWeight: '400',
+    letterSpacing: '0.14em', opacity: 0.5,
+    margin: '0',
+  },
+  'title-main': {
+    fontSize: '3.8rem', fontWeight: '800',
+    letterSpacing: '0.05em', lineHeight: '1.05',
+    margin: '0',
+  },
 };
 
 export default function DialogueBox({ text, choices = [], onChoice, disabled, isCinematic, speaker }) {

@@ -2,9 +2,30 @@ import { useEffect, useRef } from 'react';
 import { getAudioCtx, getMasterGain } from '../audio/audioContext';
 
 const BG_TO_SOUND = {
-  'bg_room.png':        'rain',
-  'bg_barrio_dawn.png': 'barrio',
-  'bg_barrio.png':      'barrio',
+  // indoor / room
+  'bg_room.png':                                    'rain',
+  'andrea-sleeps-closed-eyes-01a.png':              'rain',
+  'andrea-sleeps-open-eyes-01a.png':                'rain',
+  'bg_sala-studio-andrea-vistazo-general-01a.png':  'rain',
+  'bg_sala-studio-andrea-vistazo-general-01b.png':  'rain',
+  'bg_sala-studio-andrea-vistazo-general-01c.png':  'rain',
+  'bg_sala-studio-andrea-vistazo-general-01d.png':  'rain',
+  'bg_oficina-andrea-carmen-fuente.png':            'rain',
+  // outdoor / city
+  'bg_barrio_dawn.png':                             'barrio',
+  'bg_barrio.png':                                  'barrio',
+  'plaza-de-bolivar-geral-01-a.png':                'barrio',
+  'plaza-de-bolivar-geral-01-b.png':                'barrio',
+  'plaza-de-bolivar-geral-01-c.png':                'barrio',
+  'plaza-de-bolivar-al-piso-01-a.png':              'barrio',
+  'plaza-de-bolivar-al-piso-01-b.png':              'barrio',
+  'plaza-de-bolivar-al-piso-01-c.png':              'barrio',
+  'plaza-de-bolivar-al-piso-01-d.png':              'barrio',
+  'plaza-de-bolivar-protesta-01-a.png':             'barrio',
+  'plaza-de-bolivar-protesta-01-b.png':             'barrio',
+  'bg_se-monta-en-taxi-01a.png':                    'barrio',
+  'bg_sale-del-edificio-01.png':                    'barrio',
+  'bg_carrera-calle-66.png':                        'barrio',
 };
 
 const PATH_CONFIGS = {
