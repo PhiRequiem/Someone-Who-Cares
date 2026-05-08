@@ -8,6 +8,24 @@ const SPEAKER_COLORS = {
   mama:   '#c8a8e9',
 };
 
+const TEXT_STYLES = {
+  'credit-main': {
+    fontSize: '3rem', fontWeight: '800',
+    letterSpacing: '0.04em', lineHeight: '1.1',
+    margin: '0 0 10px 0',
+  },
+  'credit-sub': {
+    fontSize: '0.85rem', fontWeight: '300',
+    letterSpacing: '0.1em', opacity: 0.5,
+    margin: '0 0 28px 0',
+  },
+  'credit-presents': {
+    fontSize: '1.6rem', fontWeight: '400',
+    letterSpacing: '0.18em',
+    margin: '0 0 0 0',
+  },
+};
+
 export default function DialogueBox({ text, choices = [], onChoice, disabled, isCinematic, speaker }) {
   // Stable ref so the keydown effect doesn't re-run on every render
   const onChoiceRef = useRef(onChoice);
@@ -79,6 +97,7 @@ export default function DialogueBox({ text, choices = [], onChoice, disabled, is
             {text.map((line, i) => {
               const lineText = typeof line === 'string' ? line : line.text;
               const lineColor = typeof line === 'string' ? undefined : SPEAKER_COLORS[line.speaker];
+              const customStyle = typeof line === 'string' ? null : TEXT_STYLES[line.style];
               return (
                 <p key={i} style={{
                   margin: '0 0 15px 0', lineHeight: '1.8',
@@ -86,6 +105,7 @@ export default function DialogueBox({ text, choices = [], onChoice, disabled, is
                   fontWeight: isCinematic ? '600' : '400',
                   textShadow: isCinematic ? '0 2px 10px rgba(0,0,0,0.8)' : 'none',
                   color: lineColor,
+                  ...customStyle,
                 }}>
                   {lineText}
                 </p>

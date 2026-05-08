@@ -60,9 +60,6 @@ function App() {
       setActiveQuiz(quiz);
       setTimeout(() => setShowQuiz(true), 700);
     }
-    if (action === 'increase_visibility') {
-      setVisibility(v => Math.min(v + 25, 100));
-    }
     if (typeof visibilityDelta === 'number') {
       setVisibility(v => Math.min(Math.max(v + visibilityDelta, 0), 100));
     }

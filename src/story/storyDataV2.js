@@ -13,7 +13,9 @@ export const storyData = {
 
   intro_2: {
     text: [
-      "Tecnologia Humanista, en asociación con Seguridades.org presenta"
+      { text: "Tecnologia Humanista", style: 'credit-main' },
+      { text: "en asociación con seguridades.org", style: 'credit-sub' },
+      { text: "presenta", style: 'credit-presents' },
     ],
     bg: 'black.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_3" }]
@@ -244,7 +246,7 @@ export const storyData = {
       "... Espera. Acabo de ejecutar algo que no debí.",
       "Si me estaban rastreando antes, ahora saben exactamente dónde estoy."
     ],
-    bg: 'bg_room.png', action: 'increase_visibility',
+    bg: 'bg_room.png', visibilityDelta: 25,
     choices: [{ text: "Ver qué contiene el archivo", next: "investigar_foto" }]
   },
 
