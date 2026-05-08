@@ -4,50 +4,209 @@ export const storyData = {
 
   start: {
     text: [
-      "Martes 3 de octubre...",
-      "5:30 am... Empieza a amanecer en Barrio La Cañada."
+      "“Necesitamos gente que ponga su ojo, su corazón y su conciencia al servicio de una sociedad que necesita ser contada, fotografiada y narrada con mucho respeto y humanidad”",
+      "Jesus Abad Colorado"
     ],
-    bg: 'bg_barrio_dawn.png', type: 'cinematic',
+    bg: 'black.png', type: 'cinematic',
+    // TAREA: efectos sonoras de personas en la calle. Aumentando gradualmente el volumen
+    // DIRECION: texto em fade in y se queda por 10 segundos
     choices: [{ text: "Continuar", next: "intro_2" }]
   },
 
   intro_2: {
     text: [
-      "Las calles parecen tranquilas...",
-      "Pero todos saben que un grupo de crimen organizado lleva meses intentando apropiarse de varios edificios del barrio.",
-      "Los vecinos resisten. La presión aumenta."
+      "Tecnologia Humanista, en asociación con Seguridades.org presenta"
+    // DIRECION: texto em fade in y se queda por 5 segundos
     ],
-    bg: 'bg_barrio_dawn.png', type: 'cinematic',
+    bg: 'black.png', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_3" }]
   },
 
   intro_3: {
     text: [
-      "Andrea, periodista y hacktivista, lleva horas despierta.",
-      "En su escritorio, junto al computador, hay una foto desteñida: ella y su hermano Sebastián, de niños, en este mismo barrio.",
-      "Sebastián desapareció durante la protesta del 23 de noviembre de 2019. Cuatro años. El caso sigue archivado.",
-      "Por eso no duerme."
+      "Bogotá, Colombia. 2020"
+    // DIRECION: se queda por 5 segundos
     ],
-    bg: 'bg_room.png', type: 'cinematic',
-    choices: [{ text: "Continuar", next: "mensaje_supervisor" }]
+    // Primer panel. Plaza de Bolíva con pocas personas
+    bg: 'plaza-de-bolivar-geral-01-a.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_4" }]
+  },
+
+  intro_4: {
+    text: [
+      // DIRECIÓN: cada frase abajo debe tener una formatación distinta, aunque
+      // disticiones senciallas, para sugerir distintos traseuntes hablando.
+      "Hay, no! Que allí está el tombo y no me gusta",
+      "Palomas? Son ratas aladas! jajajajja",
+      "Pues era esto o plombo. ",
+      // poner la frase seguiente en un color distinto. Es el hermano de Andrea.
+      "Andeeeee, mira la alpaca!",
+      "Pues que me quedé dormido, marica, y ela se quedó molesta.",
+    ],
+    // segundo panel. Plaza de Bolíva con algunas personas
+    bg: 'plaza-de-bolivar-geral-01-b.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_5" }]
+  },
+
+  intro_5: {
+    text: [
+      // DIRECIÓN: cada frase abajo debe tener una formatación distinta, aunque
+      // disticiones senciallas, para sugerir distintos traseuntes hablando.
+      "El man se caigó de medo!",
+      "A la orden, señora!",
+      // poner la frase seguiente en una formatación similar ao del hermano de Andrea. Es la mamá de Andrea.
+      "Andrea, segura la mano de tu hermano",
+      "No! Que vaina!",
+    ],
+    // tercer panel. Plaza de Bolíva con todas las personas
+    bg: 'plaza-de-bolivar-geral-01-c.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_6" }]
+  },
+
+  intro_6: {
+    text: [
+      "Andrea y su hermano caminan por la plaza de Bolívar en su primer visita a Bogotá."
+    ],
+    // Plaza de Bolivar al nivel del piso. Andrea y Sebas de manos dadas, algunas personas.
+    bg: 'plaza-de-bolivar-al-piso-01-a.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_7" }]
+  },
+
+  intro_7: {
+    text: [
+      // poner la frase seguiente en la formatación de Andrea.
+      "(reindo) No, no, no. No me gusta las palomas.",
+      // poner la frase seguiente la formatación de Sebastián/Sebas.
+      "Mama! Quiero un Chocomaro!",
+    ],
+    // Plaza de Bolivar al nivel del piso. Andrea y Sebas de manos dadas, algunas personas.
+    bg: 'plaza-de-bolivar-al-piso-01-b.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_8" }]
+  },
+
+  intro_7: {
+    text: [
+      // poner la frase seguiente en la formatación de Andrea.
+      "Sebas, aquí! Aquí!",
+    ],
+    // Plaza de Bolivar al nivel del piso. Andrea y Sebas. Separados un poco distante.
+    bg: 'plaza-de-bolivar-al-piso-01-c.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_9" }]
+  },
+
+  intro_9: {
+    text: [
+      // poner la frase seguiente en la formatación de Andrea.
+      "Sebás ¿Donde vás?",
+      // poner la frase seguiente en la formatación de la mamá.
+      "Andrea, segura la mano de tu hermano",
+    ],
+    // Plaza de Bolivar al nivel del piso. Más personas, algunos afiches dr protestas. Andrea y Sebas, Sebas más distante y borroso.
+    bg: 'plaza-de-bolivar-al-piso-01-d.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_10" }]
+  },
+
+  intro_10: {
+    text: [
+      // poner la frase seguiente en la formatación de Andrea.
+      "¿Donde estás?"
+    ],
+    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
+    bg: 'plaza-de-bolivar-protesta-01-a.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_11" }]
+  },
+
+  intro_11: {
+    text: [
+      // poner la frase seguiente en la formatación de Andrea.
+      "¡Sebas¿  Donde estás?",
+      // poner la frase seguiente en la formatación de la mamá.
+      "Andrea ¿donde está tu hermano?",
+    ],
+    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
+    bg: 'plaza-de-bolivar-protesta-01-b.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_12" }]
+  },
+
+  intro_12: {
+    text: [
+      // poner la frase seguiente en la formatación de Andrea.
+      "Sebas?! Seebaaaas!!",
+    ],
+    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
+    bg: 'black.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "intro_13" }]
+  },
+
+  intro_13: {
+    text: [
+      // Titular
+      "Alguien a quien le importe",
+    ],
+    // Protesta en la plaza de bolivar. Andrea adulta. Sebas ya no esta.
+    bg: 'black.png', type: 'cinematic',
+    choices: [{ text: "Continuar", next: "andrea_starts_day_01a" }]
   },
 
   // ACTO 1: EL MENSAJE
 
+  andrea_starts_day_01a: {
+    text: [
+      // alerta de mensaje, telefone vibra
+      "bzzzzzzzzzz bzzzzzzzz;"
+    ],
+    bg: 'andrea-sleeps-closed-eyes-01a.png',
+    signalNotif: { from: 'Carmen G.', text: '[1 mesaje]' }
+  },
+
+   andrea_starts_day_01b: {
+    text: [
+      // alerta de mensaje, telefone vibra
+      "bzzzzzzzzzz bzzzzzzzz;"
+    ],
+    bg: 'andrea-sleeps-open-eyes-01a.png',
+    signalNotif: { from: 'Carmen G.', text: '[2 mesajes]' }
+  },
+
+   andrea_starts_day_01c: {
+    text: [
+      // alerta de mensaje, telefone vibra
+      "bzzzzzzzzzz bzzzzzzzz;"
+    ],
+    bg: 'andrea-sleeps-closed-eyes-01a.png',
+    signalNotif: { from: 'Carmen G.', text: '[3 mesajes]' }
+  },
+  
   mensaje_supervisor: {
     text: [
-      "Una notificación en Signal. Es Carmen, su supervisora en la redacción.",
-      "'Andrea. Tengo una fuente en la Procuraduría dispuesta a reabrir casos de desaparición del 23N.'",
-      "'Pero necesita evidencia sólida. No puede arriesgarse sin algo concreto.'",
-      "'Tienes hasta el jueves. Empieza por el barrio.'"
+      "3 notificaciiones en Signal. Es Carmen, su supervisora en la redacción.",
+      "Tu ojos está cerrados y estás cansada. No ha dormido nada.",
+      "Uno noche más de insomnio."
     ],
     bg: 'bg_room.png',
-    signalNotif: { from: 'Carmen G.', text: 'Fuente en la Procuraduría. Necesito evidencia sólida.' },
+    signalNotif: { from: 'Carmen G.', text: '[3 mesajes]' },
     choices: [
-      { text: "Responder: voy a trabajar en eso", next: "acto_1_inicio" },
-      { text: "Analizar la situación primero", next: "acto_1_inicio" }
+      { text: "Levantar sin contestar", next: "acto_1_inicio" },
+      { text: "lanzar el teléfono y intentar dormir", next: "acto_1_inicio" },
+      { text: "apagar el teléfono y intentar dormir", next: "acto_1_inicio" },
+      { text: "Verificar mensajes", next: "acto_1_inicio" }
     ]
   },
+
+  // mensaje_supervisor: {
+  //   text: [
+  //     "Una notificación en Signal. Es Carmen, su supervisora en la redacción.",
+  //     "'Andrea. Tengo una fuente en la Procuraduría dispuesta a reabrir casos de desaparición del 23N.'",
+  //     "'Pero necesita evidencia sólida. No puede arriesgarse sin algo concreto.'",
+  //     "'Tienes hasta el jueves. Empieza por el barrio.'"
+  //   ],
+  //   bg: 'bg_room.png',
+  //   signalNotif: { from: 'Carmen G.', text: 'Fuente en la Procuraduría. Necesito evidencia sólida.' },
+  //   choices: [
+  //     { text: "Responder: voy a trabajar en eso", next: "acto_1_inicio" },
+  //     { text: "Analizar la situación primero", next: "acto_1_inicio" }
+  //   ]
+  // },
 
   acto_1_inicio: {
     text: [
