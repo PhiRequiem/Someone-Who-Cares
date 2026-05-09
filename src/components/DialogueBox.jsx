@@ -10,7 +10,7 @@ const SPEAKER_COLORS = {
 
 const TEXT_STYLES = {
   'credit-main': {
-    fontSize: '3rem', fontWeight: '800',
+    color: 0o0, fontSize: '3rem', fontWeight: '800',
     letterSpacing: '0.04em', lineHeight: '1.1',
     margin: '0 0 10px 0',
   },
