@@ -29,7 +29,7 @@ export const storyData = {
       // DIRECION: se queda por 5 segundos
     ],
     // Primer panel. Plaza de Bolíva con pocas personas
-    bg: 'plaza-de-bolivar-geral-01-a.png', type: 'cinematic',
+    bg: 'plaza-de-bolivar-geral-01-a.jpg', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_4" }]
   },
 
@@ -42,7 +42,7 @@ export const storyData = {
       "Pues que me quedé dormido, marica, y ela se quedó molesta.",
     ],
     // segundo panel. Plaza de Bolíva con algunas personas
-    bg: 'plaza-de-bolivar-geral-01-b.png', type: 'cinematic',
+    bg: 'plaza-de-bolivar-geral-01-b.jpg', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_5" }]
   },
 
@@ -54,7 +54,7 @@ export const storyData = {
       "No! Que vaina!",
     ],
     // tercer panel. Plaza de Bolíva con todas las personas
-    bg: 'plaza-de-bolivar-geral-01-c.png', type: 'cinematic',
+    bg: 'plaza-de-bolivar-geral-01-c.jpg', type: 'cinematic',
     choices: [{ text: "Continuar", next: "intro_6" }]
   },
 
