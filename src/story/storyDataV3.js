@@ -7,7 +7,7 @@ export const storyData = {
       { text: '"Necesitamos gente que ponga su ojo, su corazón y su conciencia al servicio de una sociedad que necesita ser contada, fotografiada y narrada con mucho respeto y humanidad"', style: 'quote-main' },
       { text: "— Jesus Abad Colorado", style: 'quote-author' },
     ],
-    bg: 'black.png', type: 'cinematic',
+    bg: 'img_0235-horizontal.jpg', type: 'cinematic',
     // TAREA: efectos sonoras de personas en la calle. Aumentando gradualmente el volumen
     // DIRECION: texto em fade in y se queda por 10 segundos
     choices: [{ text: "Continuar", next: "intro_2" }]
