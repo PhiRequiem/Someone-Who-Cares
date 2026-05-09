@@ -333,7 +333,7 @@ export const storyData = {
       "Desafortunadamente, la fuente se fue y tu supervisora no comparte la identidad de la fuente.",
       "Su investigación a respeto de la desapareción de su hermano se quedó mucho más difícil."
     ],
-    bg: 'bg_sala-studio-andrea-vistazo-general-01c.png',
+    bg: 'bg_sala-studio-andrea-vistazo-general-01c.jpg',
     choices: [{ text: "Ver resumen del demo", next: "start", showSummary: true }]
   },
 
@@ -523,7 +523,7 @@ export const storyData = {
       "Sigues por la carrera quinta y al entrar en la calle 66. Percebes un taxi entrando en la misma calle.",
       "El taxi para justo adelante de ti, casi golpeandote y de ahí se salle 3 chicos con cuchilos.",
     ],
-    bg: 'bg_carrera-calle-66.png',
+    bg: 'bg_carrera-carrera-cuarta.jpg',
     choices: [{ text: "Continuar", next: "ir_a_septima_03" }]
   },
 
@@ -532,7 +532,7 @@ export const storyData = {
       "Sigues por la carrera quinta y al entrar en la calle 66. Percebes un taxi entrando en la misma calle.",
       "El taxi para justo adelante de ti, casi golpeandote y de ahí se salle 3 chicos con cuchilos.",
     ],
-    bg: 'bg_carrera-calle-66.png',
+    bg: 'bg_carrera-calle-66.jpg',
     choices: [
       { text: "Intento huir y correr", next: "ir_a_septima_04" },
       { text: "Entrego todos mis cosas y intento desarmar la situación", next: "ir_a_septima_05" }
